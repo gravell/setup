@@ -1,0 +1,3 @@
+echo Starting script...
+#do stuff here
+echo Script finished!
