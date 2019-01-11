@@ -100,7 +100,7 @@ set tabstop=4 shiftwidth=4 expandtab
 set laststatus=2
 
 " Line should not be wider than 80 characters
-set colorcolumn=81
+" set colorcolumn=81
 " let &colorcolumn=join(range(81,999),",")
 
 " Search options
