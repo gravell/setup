@@ -27,6 +27,8 @@ Plugin 'crusoexia/vim-monokai'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rcabralc/monokai-airline.vim'
 Plugin 'ronakg/quickr-cscope.vim'
+Plugin 'ronakg/quickr-preview.vim'
+Plugin 'powerman/vim-plugin-AnsiEsc'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
