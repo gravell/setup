@@ -1,3 +1,7 @@
+" TODO:
+" - cleanup
+" - NerdCommenter fixing
+
 "Set - as default leader
 let mapleader="-"
 
@@ -19,15 +23,16 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
+Plugin 'erig0/cscope_dynamic'
 Plugin 'brookhong/cscope.vim'
 " Plugin 'vim-scripts/AutoTag'
 " Plugin 'ervandew/supertab'
 Plugin 'drn/zoomwin-vim'
+" Plugin 'ronakg/quickr-cscope.vim'
+Plugin 'ronakg/quickr-preview.vim'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rcabralc/monokai-airline.vim'
-Plugin 'ronakg/quickr-cscope.vim'
-Plugin 'ronakg/quickr-preview.vim'
 Plugin 'powerman/vim-plugin-AnsiEsc'
 
 " All of your Plugins must be added before the following line
@@ -92,8 +97,9 @@ set autoindent
 set cindent
 set tabstop=4 shiftwidth=4 expandtab
 
-" Set past mode switch to F2
-" set pastetoggle=<F2>
+" Set past mode switch to F10
+set pastetoggle=<F10>
+set showmode
 
 " Enter paste mode before pasting text
 " inoremap <silent> <S-Insert> <F2><S-Insert><F2>
@@ -152,6 +158,7 @@ nmap <leader>af :Autoformat<CR>
 command!-bang Q q<bang>
 command! Wa wa
 command! WA wa
+" command! W w
 
 " NerdTree options
 nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
@@ -171,8 +178,18 @@ set completeopt-=preview
 " Zoomwin options
 nnoremap <silent> <c-w>w :ZoomWin<CR>
 
-" Cscope options
-" source ~/cscope_maps.vim
+function! RefreshCscopeDatabase()
+    :silent exec"!(cscope -R -b && mv cscope.out ~/cscope.out)"
+    :exec ":redraw!"
+    :cs reset
+endfunction
+" Manually reload cscope database
+nnoremap <silent> <leader>fr :call RefreshCscopeDatabase()<CR>
+" Load cscope database on vim start
+autocmd VimEnter * cs add ~/cscope.out
+" Update cscope database on file save
+" autocmd BufWritePost *.[ch] silent! exec RefreshCscopeDatabase()
+" autocmd BufWritePost *.[ch] silent! (!~/build_cscope_db.sh)
 
 " A (alternate) options
 " source ~/a.vim
@@ -180,7 +197,7 @@ nnoremap <silent> <c-w>w :ZoomWin<CR>
 " Cscove options
 let g:cscope_silent=1
 
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+" nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
 " s: Find this C symbol
 nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
@@ -193,13 +210,8 @@ nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
 " t: Find this text string
 nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
 " e: Find this egrep pattern
-nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
 " f: Find this file
 nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
-
-let g:quickr_cscope_autoload_db = 0
-nmap <C-j> <plug>(quickr_cscope_symbols)
-nmap <C-j>s <plug>(quickr_cscope_global_split)
-nmap <C-j>v <plug>(quickr_cscope_global_vert_split)
