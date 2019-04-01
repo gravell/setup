@@ -1,6 +1,9 @@
 " TODO:
+" - Auto preview on quickfix window
+" - Auto close quickfix window on entering record
 " - cleanup
 " - NerdCommenter fixing
+" - Adjusting of quickr preview
 
 "Set - as default leader
 let mapleader="-"
@@ -158,7 +161,7 @@ nmap <leader>af :Autoformat<CR>
 command!-bang Q q<bang>
 command! Wa wa
 command! WA wa
-" command! W w
+command! W w
 
 " NerdTree options
 nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
@@ -210,7 +213,7 @@ nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
 " t: Find this text string
 nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
 " e: Find this egrep pattern
-" nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
 " f: Find this file
 nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 " i: Find files #including this file
