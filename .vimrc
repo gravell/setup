@@ -1,4 +1,5 @@
 " TODO:
+" - Add manual search for cscope plugin (manual typing)
 " - Auto preview on quickfix window
 " - Auto close quickfix window on entering record
 " - cleanup
@@ -66,6 +67,8 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " Reload .vimrc
 nnoremap <leader>so :so $MYVIMRC<CR>
+" Open .vimrc for edit
+nnoremap <leader>se :e $MYVIMRC<CR>
 
 " * and # highlights but doesn't jump to next by default
 " nnoremap * :keepjumps normal *``<CR>
@@ -192,7 +195,6 @@ nnoremap <silent> <leader>fr :call RefreshCscopeDatabase()<CR>
 autocmd VimEnter * cs add ~/cscope.out
 " Update cscope database on file save
 " autocmd BufWritePost *.[ch] silent! exec RefreshCscopeDatabase()
-" autocmd BufWritePost *.[ch] silent! (!~/build_cscope_db.sh)
 
 " A (alternate) options
 " source ~/a.vim
