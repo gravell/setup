@@ -186,15 +186,15 @@ set completeopt-=preview
 " Zoomwin options
 nnoremap <silent> <c-w>w :ZoomWin<CR>
 
-function! RefreshCscopeDatabase()
-    :silent exec"!(cscope -R -b && mv cscope.out ~/cscope.out)"
-    :exec ":redraw!"
-    :cs reset
-endfunction
+" function! RefreshCscopeDatabase()
+    " :silent exec"!(cscope -R -b && mv cscope.out ~/cscope.out)"
+    " :exec ":redraw!"
+    " :cs reset
+" endfunction
 " Manually reload cscope database
-nnoremap <silent> <leader>fr :call RefreshCscopeDatabase()<CR>
+" nnoremap <silent> <leader>fr :call RefreshCscopeDatabase()<CR>
 " Load cscope database on vim start
-autocmd VimEnter * cs add ~/cscope.out
+" autocmd VimEnter * cs add ~/cscope.out
 " Update cscope database on file save
 " autocmd BufWritePost *.[ch] silent! exec RefreshCscopeDatabase()
 
@@ -206,6 +206,11 @@ let g:cscope_silent = 1
 let g:cscope_auto_update = 0
 
 " nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+function! RefreshCscopeDatabase()
+    :call CscopeUpdateDB()
+    :exec ":redraw!"
+endfunction
+nnoremap <leader>fr :call RefreshCscopeDatabase()<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
 " s: Find this C symbol
 nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
