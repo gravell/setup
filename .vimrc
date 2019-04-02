@@ -1,4 +1,6 @@
 " TODO:
+" - Fix database load bo cscope (cscove) plugin - after branch switch it has
+"   mismatches after CscopeFind
 " - Add manual search for cscope plugin (manual typing)
 " - Auto preview on quickfix window
 " - Auto close quickfix window on entering record
@@ -200,7 +202,8 @@ autocmd VimEnter * cs add ~/cscope.out
 " source ~/a.vim
 
 " Cscove options
-let g:cscope_silent=1
+let g:cscope_silent = 1
+let g:cscope_auto_update = 0
 
 " nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
