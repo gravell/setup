@@ -220,3 +220,15 @@ nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
 nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+
+" Quickr preview options
+" Open entry on cursor move (no need for <leader><space>)
+let g:quickr_preview_on_cursor = 1
+" Position of preview window (relative to Quickfix one)
+let g:quickr_preview_position = 'above'
+" Size of preview window
+let g:quickr_preview_size = 0
+" Make Quickfix window always close on enter
+let g:quickr_preview_exit_on_enter = 1
+" Make it always full width on the bottom of the screen
+autocmd! FileType qf wincmd J
