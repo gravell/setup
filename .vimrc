@@ -1,5 +1,4 @@
 " TODO:
-" - Fix line numbering in Quickfix windows
 " - Fix database load bo cscope (cscove) plugin - after branch switch it has
 "   mismatches after CscopeFind
 " - Add manual search for cscope plugin (manual typing)
@@ -237,5 +236,4 @@ let g:quickr_preview_size = 0
 " Make Quickfix window always close on enter
 let g:quickr_preview_exit_on_enter = 1
 " Make it always full width on the bottom of the screen
-autocmd! FileType qf wincmd J
-" | setlocal number
+autocmd! FileType qf wincmd J | setlocal nornu nu
