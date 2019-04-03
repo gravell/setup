@@ -1,12 +1,10 @@
 " TODO:
+" - Fix line numbering in Quickfix windows
 " - Fix database load bo cscope (cscove) plugin - after branch switch it has
 "   mismatches after CscopeFind
 " - Add manual search for cscope plugin (manual typing)
-" - Auto preview on quickfix window
-" - Auto close quickfix window on entering record
 " - cleanup
 " - NerdCommenter fixing
-" - Adjusting of quickr preview
 
 "Set - as default leader
 let mapleader="-"
@@ -240,3 +238,4 @@ let g:quickr_preview_size = 0
 let g:quickr_preview_exit_on_enter = 1
 " Make it always full width on the bottom of the screen
 autocmd! FileType qf wincmd J
+" | setlocal number
