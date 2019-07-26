@@ -99,7 +99,14 @@ set tags=./tags;/
 
 " Syntax highlight
 syntax on
+" Set monokai theme
 colorscheme monokai
+" Override default monokai diff color settings to prevent eyes from blowing up
+highlight DiffAdd    cterm=NONE ctermbg=23  ctermfg=252 gui=NONE guibg=#00F5F5 guifg=#E8E8E3
+highlight DiffDelete cterm=NONE ctermbg=167 ctermfg=234 gui=NONE guibg=#F75F5F guifg=#272822
+highlight DiffChange cterm=NONE ctermbg=60  ctermfg=189 gui=NONE guibg=#5F5F87 guifg=#D7D7FF
+highlight DiffText   cterm=NONE ctermbg=130 ctermfg=252 gui=NONE guibg=#AF5F00 guifg=#E8E8E3
+" https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f
 
 " Default indentation settings
 set autoindent
