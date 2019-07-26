@@ -1,0 +1,5 @@
+[user]
+	email = gravell.gravell@wp.pl
+	name = gravell
+[diff]
+	tool = vimdiff
