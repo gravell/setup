@@ -1,9 +1,13 @@
 " TODO:
+" - Fix auto jumping to first cscope result
 " - Fix database load bo cscope (cscove) plugin - after branch switch it has
 "   mismatches after CscopeFind
 " - Add manual search for cscope plugin (manual typing)
 " - cleanup
-" - NerdCommenter fixing
+" - NerdCommenter fixing (when toggling in visual mode it comments already
+"   commented out lines - remove double comments)
+"   (\s*)\/\/\s+\/\/
+"   :%s/\v(\s*)\/\/\s+\/\//\1\/\/ /
 
 "Set - as default leader
 let mapleader="-"
@@ -147,12 +151,15 @@ let g:ctrlp_custom_ignore={
     \}
 
 " Nerdcommenter options
+let g:NERDCustomDelimiters = { 'c': { 'left': '//'} }
 let g:NERDSpaceDelims=1
-let g:NERDCompactSexyComs=1
+" let g:NERDCompactSexyComS=1
 let g:NERDDefaultAlign='left'
-let g:NERDCommentEmptyLines=1
-let g:NERDTrimTrailingWitespace=1
+let g:NERDCommentEmptyLines=0
+" let g:NERDTrimTrailingWitespace=1
+let g:NERDToggleCheckAllLines=0
 nmap <c-c> <plug>NERDCommenterToggle
+vmap <c-c> <plug>NERDCommenterToggle
 
 " Autoformat options
 let g:foratdef_my_custom_c = '"astyle -A7 --mode=c -pcHs".&shiftwidth'
