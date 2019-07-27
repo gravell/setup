@@ -249,5 +249,5 @@ let g:quickr_preview_position = 'above'
 let g:quickr_preview_size = 0
 " Make Quickfix window always close on enter
 let g:quickr_preview_exit_on_enter = 1
-" Make it always full width on the bottom of the screen
+" Make it (quickfix) always full width on the bottom of the screen
 autocmd! FileType qf wincmd J | setlocal nornu nu
