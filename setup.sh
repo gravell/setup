@@ -7,6 +7,7 @@ SCRIPT_DIR_PATH=$(dirname $SCRIPT_FULL_PATH)
 ln -s $SCRIPT_DIR_PATH/.vimrc ~/.vimrc
 ln -s $SCRIPT_DIR_PATH/.tmux.conf ~/.tmux.conf
 ln -s $SCRIPT_DIR_PATH/.bashrc ~/.bashrc
+ln -s $SCRIPT_DIR_PATH/.gitconfig ~/.gitconfig
 echo Cloning Vundle...
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo Installing vim plugins...
