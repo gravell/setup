@@ -4,10 +4,6 @@
 "   mismatches after CscopeFind
 " - Add manual search for cscope plugin (manual typing)
 " - cleanup
-" - NerdCommenter fixing (when toggling in visual mode it comments already
-"   commented out lines - remove double comments)
-"   (\s*)\/\/\s+\/\/
-"   :%s/\v(\s*)\/\/\s+\/\//\1\/\/ /
 
 "Set - as default leader
 let mapleader="-"
@@ -167,6 +163,9 @@ let g:NERDCommentEmptyLines=0
 let g:NERDToggleCheckAllLines=0
 nmap <c-c> <plug>NERDCommenterToggle
 vmap <c-c> <plug>NERDCommenterToggle
+" Clearing of double commented lines
+nmap <leader>ncn :s/\v(\s*)\/\/\s+\/\//\1\/\/ /<CR>
+nmap <leader>ncv :'<,'>s/\v(\s*)\/\/\s+\/\//\1\/\/ /<CR>
 
 " Autoformat options
 let g:foratdef_my_custom_c = '"astyle -A7 --mode=c -pcHs".&shiftwidth'
