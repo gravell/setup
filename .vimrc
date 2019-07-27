@@ -69,6 +69,12 @@ nnoremap <leader>so :so $MYVIMRC<CR>
 " Open .vimrc for edit
 nnoremap <leader>se :e $MYVIMRC<CR>
 
+" Enable magic
+nnoremap / /\v
+vnoremap / /\v
+cnoremap s/ s/\v
+cnoremap g/ g/\v
+
 " * and # highlights but doesn't jump to next by default
 " nnoremap * :keepjumps normal *``<CR>
 " nnoremap # :keepjumps normal #``<CR>
