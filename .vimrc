@@ -226,6 +226,11 @@ function! RefreshCscopeDatabase()
     :call CscopeUpdateDB()
     :exec ":redraw!"
 endfunction
+" function! Cscope_do_stuff()
+"     let view = winsaveview()
+"     nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+"     call winrestview(view)
+" endfunction
 nnoremap <leader>fr :call RefreshCscopeDatabase()<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
 " s: Find this C symbol
