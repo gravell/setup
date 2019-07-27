@@ -3,6 +3,7 @@
 " - Fix database load bo cscope (cscove) plugin - after branch switch it has
 "   mismatches after CscopeFind
 " - Add manual search for cscope plugin (manual typing)
+" - Do research on hex editing (hex and ascii view must be mutually dependent)
 " - cleanup
 
 "Set - as default leader
