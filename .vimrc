@@ -1,9 +1,6 @@
 " TODO:
 " - Fix auto jumping to first cscope result
-" - Fix database load bo cscope (cscove) plugin - after branch switch it has
-"   mismatches after CscopeFind
 " - Add manual search for cscope plugin (manual typing)
-" - Do research on hex editing (hex and ascii view must be mutually dependent)
 " - cleanup
 
 "Set - as default leader
@@ -203,35 +200,23 @@ set completeopt-=preview
 " Zoomwin options
 nnoremap <silent> <c-w>w :ZoomWin<CR>
 
-" function! RefreshCscopeDatabase()
-    " :silent exec"!(cscope -R -b && mv cscope.out ~/cscope.out)"
-    " :exec ":redraw!"
-    " :cs reset
-" endfunction
-" Manually reload cscope database
-" nnoremap <silent> <leader>fr :call RefreshCscopeDatabase()<CR>
-" Load cscope database on vim start
-" autocmd VimEnter * cs add ~/cscope.out
-" Update cscope database on file save
-" autocmd BufWritePost *.[ch] silent! exec RefreshCscopeDatabase()
-
 " A (alternate) options
 " source ~/a.vim
 
 " Cscove options
 let g:cscope_silent = 1
 let g:cscope_auto_update = 0
+let g:cscope_ignored_dir ="(build_scripts\|docs\|fpga\|.git\|githooks\|outputs\|rom\|signed\|simics-output\|tools\|versions)"
 
-" nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 function! RefreshCscopeDatabase()
-    :call CscopeUpdateDB()
+    :silent exec ":CscopeClear"
+    :silent exec "!\[ -d \"~\/.cscope.vim\/\" \] && rm -r ~\/.cscope.vim\/"
+    :exec ":redraw!"
+    :call CscopeFind('x', 'dummy_arg')
     :exec ":redraw!"
 endfunction
-" function! Cscope_do_stuff()
-"     let view = winsaveview()
-"     nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-"     call winrestview(view)
-" endfunction
+
+" nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>fr :call RefreshCscopeDatabase()<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
 " s: Find this C symbol
