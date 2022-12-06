@@ -5,3 +5,5 @@
 	name = gravell
 [diff]
 	tool = vimdiff
+[color]
+	ui = auto
