@@ -2,6 +2,13 @@
 " - Fix auto jumping to first cscope result
 " - Add manual search for cscope plugin (manual typing)
 " - cleanup
+" - Plugin fixes:
+" -- QuickrPreview:
+" --- quickr_preview_exit_on_enter: cclose; lclose;
+" -- Cscove:
+" --- Exculde 'x' action from CscopeFind
+" - Add proejct specific settings (i.e. exclude paths for CtrlP and CScope)
+" - Add dictionary
 
 "Set - as default leader
 let mapleader="-"
@@ -68,14 +75,17 @@ nnoremap <leader>so :so $MYVIMRC<CR>
 nnoremap <leader>se :e $MYVIMRC<CR>
 
 " Enable magic
-nnoremap / /\v
-vnoremap / /\v
-cnoremap s/ s/\v
-cnoremap g/ g/\v
+" nnoremap / /\v
+" vnoremap / /\v
+" cnoremap s/ s/\v
+" cnoremap g/ g/\v
 
 " * and # highlights but doesn't jump to next by default
 " nnoremap * :keepjumps normal *``<CR>
 " nnoremap # :keepjumps normal #``<CR>
+
+" Search for string within other strings
+nnoremap <silent> g* :let @/=expand('<cword>') <bar> set hls <cr>
 
 " Current line highlighting and line numbering
 set number
@@ -85,7 +95,7 @@ set cursorline
 " Disable swap files
 set noswapfile
 
-" When next buffer is openedthe currently modified one goes into background
+" When next buffer is opened the currently modified one goes into background
 set hidden
 
 " Enable mouse
@@ -149,6 +159,7 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='monokai'
 
 " Ctrlp options
+let g:ctrlp_max_files=0
 let g:ctrlp_map='<c-p>'
 let g:ctrlp_match_window = 'results:100'
 let g:ctrlp_working_path_mode='a'
@@ -156,6 +167,9 @@ let g:ctrlp_custom_ignore={
     \'dir': '\v[\/]\.(git|hg|svn)$',
     \'file': '\v\.(o|disasm|hex|readelf|ioc|bin|exe|sc|dll)$'
     \}
+let g:ctrlp_by_filename=1
+let g:ctrlp_regexp=1
+let g:ctrlp_lazy_update=1
 
 " Nerdcommenter options
 let g:NERDCustomDelimiters = { 'c': { 'left': '//'} }
@@ -184,6 +198,8 @@ command! W w
 
 " NerdTree options
 nnoremap <silent> <leader>ne :NERDTreeToggle<CR>
+nnoremap <silent> <leader>nf :NERDTreeFind<cr>
+nnoremap <silent> <leader>nr :NERDTreeRefreshRoot<cr>
 
 " Tagbar options
 nnoremap <silent> <leader>t :TagbarToggle<CR>
@@ -206,7 +222,9 @@ nnoremap <silent> <c-w>w :ZoomWin<CR>
 " Cscove options
 let g:cscope_silent = 1
 let g:cscope_auto_update = 0
-let g:cscope_ignored_dir ="(build_scripts\|docs\|fpga\|.git\|githooks\|outputs\|rom\|signed\|simics-output\|tools\|versions)"
+" Example of ignore string:
+" let g:cscope_ignored_dir ="(folder1\|.folder2\|.folder3)"
+let g:cscope_ignored_dir ="(prebuilds\|.repo\|.git\|githooks)"
 
 function! RefreshCscopeDatabase()
     :silent exec ":CscopeClear"
