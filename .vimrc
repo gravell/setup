@@ -8,7 +8,6 @@
 " -- Cscove:
 " --- Exculde 'x' action from CscopeFind
 " - Add proejct specific settings (i.e. exclude paths for CtrlP and CScope)
-" - Add dictionary
 
 "Set - as default leader
 let mapleader="-"
@@ -265,3 +264,49 @@ let g:quickr_preview_size = 0
 let g:quickr_preview_exit_on_enter = 1
 " Make it (quickfix) always full width on the bottom of the screen
 autocmd! FileType qf wincmd J | setlocal nornu nu
+
+function! OpenHeader()
+    let l:filename_base=expand("%:r")
+    if filereadable(filename_base.".h")
+        :e %:r.h
+    elseif filereadable(filename_base.".hpp")
+        :e %:r.hpp
+    else
+        echo "No matching header file found"
+    endif
+endfunction
+
+function! OpenSource()
+    let l:filename_base=expand("%:r")
+    if filereadable(filename_base.".c")
+        :e %:r.c
+    elseif filereadable(filename_base.".cpp")
+        :e %:r.cpp
+    else
+        echo "No matching source file found"
+    endif
+endfunction
+
+function! SwitchBetweenSourceAndHeader()
+    let l:extension=expand("%:e")
+    if l:extension == "c" || l:extension == "cpp"
+        :call OpenHeader()
+    elseif l:extension == "h" || l:extension == "hpp"
+        :call OpenSource()
+    endif
+endfunction
+
+" Quick switch between c/cpp and h/hpp
+nnoremap  <leader>a :call SwitchBetweenSourceAndHeader()<CR>
+nnoremap  <leader>A :call SwitchBetweenSourceAndHeader()<CR>
+
+function! ToggleSpellCheck()
+    if &spell == "nospell"
+        :set spell spelllang=en_us
+    else
+        :set nospell
+    endif
+endfunction
+
+" Spellcheck toggle
+nnoremap  <leader>sp :call ToggleSpellCheck()<CR>
